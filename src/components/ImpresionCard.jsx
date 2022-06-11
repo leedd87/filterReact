@@ -12,7 +12,6 @@ import Card from "./Card";
 function ImpresionCard({ arrayFiltrado }) {
 	return (
 		<>
-			{" "}
 			{/*RECORDAR EL FRAGMENT! o DIV */}
 			{arrayFiltrado.map((element) => {
 				return (

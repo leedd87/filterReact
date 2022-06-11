@@ -1,6 +1,6 @@
 import React from "react";
 // import data from "../data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NoSeEncontro from "./NoSeEncontro";
 import ImpresionCard from "./ImpresionCard";
 import dataObjeto from "../dataObjeto";
@@ -12,7 +12,13 @@ function Input() {
 		setSearchInput(e.target.value);
 	};
 
-	console.log(dataObjeto);
+	useEffect(() => {
+		fetch("./data.json")
+			.then((res) => res.json())
+			.then((res) => console.log(res));
+	}, []);
+
+	// console.log(dataObjeto);
 
 	const dataArray = [];
 
@@ -24,15 +30,21 @@ function Input() {
 
 	console.log(dataArray);
 
+	// const filter = dataArray.filter((elemento) => {
+	// 	if (elemento === "") {
+	// 		return elemento;
+	// 	} else if (
+	// 		elemento.city.toLowerCase().startsWith(searchInput.toLowerCase())
+	// 	) {
+	// 		return elemento;
+	// 	} else {
+	// 		return null;
+	// 	}
+	// });
+
 	const filter = dataArray.filter((elemento) => {
-		if (elemento === "") {
+		if (elemento.city.toLowerCase().startsWith(searchInput.toLowerCase())) {
 			return elemento;
-		} else if (
-			elemento.city.toLowerCase().startsWith(searchInput.toLowerCase())
-		) {
-			return elemento;
-		} else {
-			return null;
 		}
 	});
 
