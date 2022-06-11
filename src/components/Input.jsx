@@ -1,57 +1,51 @@
 import React from "react";
-import data from "../data";
+// import data from "../data";
 import { useState } from "react";
-import Card from "./Card";
 import NoSeEncontro from "./NoSeEncontro";
-
-// function Input() {
-// 	const [searchInput, setSearchInput] = useState("");
-
-// 	const handleChange = (e) => {
-// 		console.log(e.target.value);
-// 		setSearchInput(e.target.value);
-// 	};
-// 	return (
-// 		<>
-// 			<input type="text" name="name" onChange={handleChange}></input>
-// 			{data
-// 				.filter((filtrado) => {
-// 					if (filtrado === "") {
-// 						return filtrado; //no filtres nada
-// 					} else if (
-// 						filtrado.city
-// 							.toLowerCase()
-// 							.startsWith(searchInput.toLowerCase())
-// 					) {
-// 						return filtrado;
-// 					} else {
-// 						return null; //si no se cumplen ninguna de las condiciones no devuelve nada - se le agrega porque el metodo filter siempre debe devolver algo
-// 					}
-// 				})
-// 				.map((element, key) => {
-// 					return (
-// 						<div key={key}>
-// 							<Card city={element.city} image={element.image} />
-// 						</div>
-// 					);
-// 				})}
-// 		</>
-// 	);
-// }
-
-// export default Input;
+import ImpresionCard from "./ImpresionCard";
+import dataObjeto from "../dataObjeto";
 
 function Input() {
 	const [searchInput, setSearchInput] = useState("");
 
 	const handleChange = (e) => {
-		console.log(e.target.value);
 		setSearchInput(e.target.value);
 	};
+
+	console.log(dataObjeto);
+
+	const dataArray = [];
+
+	dataObjeto.map((ciudad) => {
+		return ciudad.cities.map((element) => {
+			return dataArray.push(element);
+		});
+	});
+
+	console.log(dataArray);
+
+	const filter = dataArray.filter((elemento) => {
+		if (elemento === "") {
+			return elemento;
+		} else if (
+			elemento.city.toLowerCase().startsWith(searchInput.toLowerCase())
+		) {
+			return elemento;
+		} else {
+			return null;
+		}
+	});
+
 	return (
 		<>
-			<input type="text" name="name" onChange={handleChange}></input>
-			{data
+			<input type="text" name="name" onKeyUp={handleChange}></input>
+
+			{filter.length > 0 ? (
+				<ImpresionCard arrayFiltrado={filter} />
+			) : (
+				<NoSeEncontro />
+			)}
+			{/* {data
 				.filter((filtrado) => {
 					if (filtrado === "") {
 						return filtrado; //no filtres nada
@@ -66,16 +60,18 @@ function Input() {
 					} else {
 						return null;
 					}
-				})
-				.map((element, key) => {
+				}) */}
+
+			{/* <ImprecionCard arrayFiltrado={filtrado}/> */}
+
+			{/* filtrado.map((element, key) => {
 					return (
-						<div key={key}>
-							<Card city={element.city} image={element.image} />
-						</div>
-					);
-				})}
+				
+				})} */}
 		</>
 	);
 }
+
+// filtrado.lenght > 0 ? <ImprecionCard /> : <h1>NO ENCONTRE</h1>;
 
 export default Input;
