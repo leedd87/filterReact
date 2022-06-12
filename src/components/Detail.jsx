@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import dataObjeto from "../dataObjeto";
+import CardDetail from "./CardDetail";
 
 function Detail() {
 	const { id } = useParams();
@@ -19,8 +20,7 @@ function Detail() {
 
 	return (
 		<>
-			<h1>Detail {ciudad[0].id}</h1>
-			<h2>{ciudad[0].city}</h2>
+			<CardDetail ciudad={ciudad} />
 		</>
 	);
 }
