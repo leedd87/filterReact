@@ -16,7 +16,11 @@ function ImpresionCard({ arrayFiltrado }) {
 			{arrayFiltrado.map((element) => {
 				return (
 					<div key={element.id}>
-						<Card city={element.city} image={element.image} />
+						<Card
+							city={element.city}
+							image={element.image}
+							id={element.id}
+						/>
 					</div>
 				);
 			})}
